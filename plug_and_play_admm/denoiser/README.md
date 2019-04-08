@@ -1,6 +1,6 @@
 # Plug and Play ADMM
 
-DnCNN PyTorch implementation of the [paper](https://arxiv.org/abs/1608.03981) *Beyond a Gaussian Denoiser: Residual Learning of Deep CNN for Image Denoising*, inspiered from the [repository](https://github.com/SaoYan/DnCNN-PyTorch).
+DnCNN PyTorch implementation of the [paper](https://arxiv.org/abs/1608.03981) *Beyond a Gaussian Denoiser: Residual Learning of Deep CNN for Image Denoising*, inspired from this [repository](https://github.com/SaoYan/DnCNN-PyTorch).
 
 Usage:
 
