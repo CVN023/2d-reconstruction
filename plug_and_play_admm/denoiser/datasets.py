@@ -17,8 +17,22 @@ def gray_scale(x):
     x = x.convert('LA')
     return np.array(x)[:,:,0]
 
+def add_micro(x,add):
+    white = np.max(x)
+    x_micro = np.copy(x)
+    middle = len(x)/2
+    #center of the micro zone
+    middle_micro = np.random.randint(middle-add,middle+add)
+    # add the dots inside the micro zone
+    x_micro[middle_micro,middle_micro] = white
+    x_micro[middle_micro-1,middle_micro-1] = white
+    x_micro[middle_micro+1,middle_micro+1] = white
+    return x_micro, (middle_micro, middle_micro)
+    
+
 base_transform = transforms.Compose([transforms.CenterCrop(64),
                                     transforms.Lambda(lambda x: gray_scale(x)),
+                                    transforms.Lambda(lambda x: add_micro(x,8)[0]),
                                     transforms.ToTensor(),])
 
 class STL10(CIFAR10):
