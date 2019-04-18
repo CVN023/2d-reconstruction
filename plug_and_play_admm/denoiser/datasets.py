@@ -13,9 +13,16 @@ from torchvision.datasets import CIFAR10
 import torchvision
 import torchvision.transforms as transforms
 
+from PIL import ImageMath
+
+
 def gray_scale(x):
     x = x.convert('LA')
-    return np.array(x)[:,:,0]
+    x = np.array(x)[:,:,0]
+    #if np.random.rand()>0.25:
+    x = 1 - x
+    return x
+
 
 def add_micro(x,add):
     white = np.max(x)
@@ -32,7 +39,7 @@ def add_micro(x,add):
 
 base_transform = transforms.Compose([transforms.CenterCrop(64),
                                     transforms.Lambda(lambda x: gray_scale(x)),
-                                    transforms.Lambda(lambda x: add_micro(x,8)[0]),
+                                    #transforms.Lambda(lambda x: add_micro(x,8)[0]),
                                     transforms.ToTensor(),])
 
 class STL10(CIFAR10):

@@ -42,8 +42,9 @@ def load_projection_matrix(path):
 def noisy_fbp(x, A, noise_min=1e2, noise_max=1e3):
     # Gray scale
     x = x.convert('LA')
+    x = 1 - np.array(x)[:,:,0]
     # Projection
-    p = np.matmul(A, np.array(x)[:,:,0].flatten())
+    p = np.matmul(A, x.flatten())
     # Add noise
     noises = np.random.uniform(noise_min, noise_max, size=p.shape)
     p = p + np.random.normal(np.zeros(p.shape), noises)

@@ -44,7 +44,6 @@ class PlugAndPlayADMM(Optimizer):
         self.At_proj = np.squeeze(np.array( (A.T).dot(proj) ))
         self.net = net
         self.x_tilde = x0.copy()
-        self.v_tilde = x0.copy()
         self.u_bar = np.ones(x0.shape[0])
         
         
@@ -115,14 +114,13 @@ class AdaptativePlugAndPlayADMM(Optimizer):
 
 class TVOptimizer(Optimizer):
 
-    def __init__(self, x0, A, proj, eta, Lambda, epsilon = 1e-5, save_f=False):
+    def __init__(self, x0, A, proj, Lambda, epsilon = 1e-5, save_f=False):
         super().__init__(save_f)
         self.n = int(np.sqrt(x0.shape[0]))
         self.A = A
         self.proj = proj
         self.At_A = np.matmul(A.T, A)
         self.At_proj = (A.T).dot(proj)
-        self.eta = eta
         self.Lambda = Lambda
         self.epsilon = epsilon
         self.E = []
